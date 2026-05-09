@@ -8,6 +8,9 @@ let tamanhoSelecionado = null;
 let corSelecionada = null;
 let quantidade = 1;
 
+// Estado do carrossel
+let imagemAtual = 0;
+
 document.addEventListener('DOMContentLoaded', () => {
     carregarProduto();
     inicializarQuantidade();
@@ -20,23 +23,21 @@ async function carregarProduto() {
     const loading = document.getElementById('loadingProduto');
     const productDetail = document.getElementById('productDetail');
     const notFound = document.getElementById('productNotFound');
-    
+
     const produtoId = obterParametroUrl('id');
-    
+
     if (!produtoId) {
         mostrarNaoEncontrado();
         return;
     }
-    
+
     try {
-        // Busca produto (pode ser fixo ou da API)
         produtoAtual = await buscarProdutoPorId(produtoId);
-        
+
         if (!produtoAtual) {
-            // Se não encontrou nos fixos, tenta simular busca na API
             produtoAtual = await buscarProdutoSimulado(produtoId);
         }
-        
+
         if (produtoAtual) {
             renderizarProduto();
             loading.style.display = 'none';
@@ -44,7 +45,7 @@ async function carregarProduto() {
         } else {
             mostrarNaoEncontrado();
         }
-        
+
     } catch (error) {
         console.error('Erro ao carregar produto:', error);
         mostrarNaoEncontrado();
@@ -55,90 +56,124 @@ async function carregarProduto() {
  * Simula busca na API para produtos dinâmicos
  */
 async function buscarProdutoSimulado(id) {
-    // Lista de produtos simulados da API
     const produtosApi = [
         {
             id: 'api-1',
-            nome: 'Scrub Comfort Fit Azul Marinho',
+            nome: 'Scrub Standard Masculino',
             categoria: 'scrubs',
-            preco: 229.90,
-            precoOriginal: null,
-            descricao: 'Scrub com modelagem comfort fit, ideal para longas jornadas. Tecido respirável e antibacteriano. Possui bolsos funcionais e costuras reforçadas para maior durabilidade.',
-            tamanhos: ['P', 'M', 'G', 'GG'],
-            cores: ['Azul Marinho', 'Preto'],
-            imagem: null,
+            preco: 124.90,
+            precoOriginal: 234.90,
+            descricao: 'Scrub masculino funcional e resistente, ideal para o dia a dia acadêmico e hospitalar, garantindo conforto e mobilidade.',
+            tamanhos: ['P', 'M', 'G', 'GG', 'XG'],
+            cores: ['Azul Marinho', 'Verde Escuro'],
+            imagens: [
+                "../images/Scrubs/ScrubStandardMasc/ScrubMasc.jpg",
+                "../images/Scrubs/ScrubStandardMasc/ScrubMasc1.jpg",
+                "../images/Scrubs/ScrubStandardMasc/ScrubMasc2.jpg",
+                "../images/Scrubs/ScrubStandardMasc/ScrubMasc3.jpg"
+            ],
             destaque: false
         },
         {
             id: 'api-2',
-            nome: 'Jaleco Slim Feminino',
-            categoria: 'jalecos',
-            preco: 319.90,
-            precoOriginal: 379.90,
-            descricao: 'Jaleco feminino com corte slim e bolsos funcionais. Acabamento premium com detalhes elegantes. Tecido com tratamento anti-manchas.',
-            tamanhos: ['PP', 'P', 'M', 'G', 'GG'],
-            cores: ['Branco', 'Azul Claro'],
-            imagem: null,
+            nome: 'Scrub Action Masculino',
+            categoria: 'scrubs',
+            preco: 154.90,
+            precoOriginal: 164.90,
+            descricao: 'Scrub masculino com modelagem confortável e bolsos funcionais. Tecido com tratamento anti-manchas.',
+            tamanhos: ['P', 'M', 'G', 'GG', 'XG'],
+            cores: ['Preto'],
+            imagens: [
+                "../images/Jalecos/JalecoMasc.jpg",
+                "../images/Jalecos/JalecoMasc1.jpg",
+                "../images/Jalecos/JalecoMasc2.jpg",
+                "../images/Jalecos/JalecoMasc3.jpg",
+            ],
             destaque: false
         },
         {
             id: 'api-3',
-            nome: 'Conjunto Scrub Essencial',
+            nome: 'Conjunto Scrub Essential',
             categoria: 'scrubs',
-            preco: 199.90,
-            precoOriginal: null,
-            descricao: 'Conjunto básico de qualidade premium. Perfeito para o dia a dia no ambiente hospitalar. Tecido leve e confortável.',
-            tamanhos: ['P', 'M', 'G', 'GG', 'XG'],
-            cores: ['Verde', 'Azul', 'Cinza'],
-            imagem: null,
+            preco: 149.90,
+            precoOriginal: 239.90,
+            descricao: 'Scrub premium feminino que une conforto térmico e flexibilidade, ideal para longos turnos.',
+            tamanhos: ['PP', 'P', 'M', 'G', 'GG'],
+            cores: ['Azul Turquesa'],
+            imagens: [
+                "../images/Scrubs/ScrubEssenctialFem/ScrubFem.jpg",
+                "../images/Scrubs/ScrubEssenctialFem/ScrubFem.jpg",
+                "../images/Scrubs/ScrubEssenctialFem/ScrubFem.jpg",
+                "../images/Scrubs/ScrubEssenctialFem/ScrubFem.jpg"
+            ],
             destaque: false
         },
         {
             id: 'api-4',
-            nome: 'Jaleco Unissex Clássico',
-            categoria: 'jalecos',
-            preco: 289.90,
-            precoOriginal: null,
-            descricao: 'Jaleco tradicional com corte amplo e confortável. Ideal para diversos profissionais da saúde. Botões reforçados e bolsos amplos.',
-            tamanhos: ['P', 'M', 'G', 'GG', 'XG'],
-            cores: ['Branco'],
-            imagem: null,
+            nome: 'Conjunto Scrub Basic Feminino',
+            categoria: 'scrubs',
+            preco: 99.90,
+            precoOriginal: 109.90,
+            descricao: 'Confeccionado em Oxfordine, o conjunto Basic é leve, macio e não amassa, garantindo conforto ao longo do dia. Possui blusa com decote em V e bolsos funcionais, além de calça com cós elástico para melhor ajuste. ✨ Ideal para quem busca elegância e praticidade na rotina profissional.',
+            tamanhos: ['PP', 'P', 'M', 'G', 'GG'],
+            cores: ['Rosa Coral'],
+            imagens: [
+                "../images/Scrubs/ScrubBasicFem/ScrubBaFem.jpg",
+                "../images/Scrubs/ScrubBasicFem/ScrubBaFem.jpg",
+                "../images/Scrubs/ScrubBasicFem/ScrubBaFem.jpg",
+                "../images/Scrubs/ScrubBasicFem/ScrubBaFem.jpg"
+            ],
             destaque: false
         },
         {
             id: 'api-5',
-            nome: 'Scrub Cirúrgico Premium',
+            nome: 'Scrub Moove Feminino',
             categoria: 'scrubs',
-            preco: 349.90,
-            precoOriginal: 429.90,
+            preco: 239.90,
+            precoOriginal: 329.90,
             descricao: 'Scrub desenvolvido para ambiente cirúrgico. Tecido com tratamento antimicrobiano avançado. Costuras seladas e acabamento de alta qualidade.',
-            tamanhos: ['P', 'M', 'G', 'GG'],
+            tamanhos: ['PP', 'P', 'M', 'G', 'GG'],
             cores: ['Verde Oliva', 'Azul Royal'],
-            imagem: null,
+            imagens: [
+                "../images/Scrubs/ScrubMooveFem/ScrubMoFem.jpg",
+                "../images/Scrubs/ScrubMooveFem/ScrubMoFem.jpg",
+                "../images/Scrubs/ScrubMooveFem/ScrubMoFem.jpg",
+                "../images/Scrubs/ScrubMooveFem/ScrubMoFem.jpg"
+            ],
             destaque: false
         },
         {
             id: 'api-6',
-            nome: 'Touca Cirúrgica Estampada',
-            categoria: 'acessorios',
-            preco: 49.90,
-            precoOriginal: null,
-            descricao: 'Touca cirúrgica com estampas exclusivas. Elástico confortável e tecido respirável. Lavável e durável.',
-            tamanhos: ['Único'],
-            cores: ['Diversas estampas'],
-            imagem: null,
+            nome: 'Scrub Classic Feminino',
+            categoria: 'scrubs',
+            preco: 119.90,
+            precoOriginal: 229.90,
+            descricao: 'Modelo feminino com visual mais estruturado e elegante, ideal para quem busca um scrub tradicional com acabamento superior.',
+            tamanhos: ['PP', 'P', 'M', 'G', 'GG'],
+            cores: ['Vinho'],
+            imagens: [
+                "../images/Scrubs/ScrubClasscFem/ScrubCLFem.jpg",
+                "../images/Scrubs/ScrubClasscFem/ScrubCLFem.jpg",
+                "../images/Scrubs/ScrubClasscFem/ScrubCLFem.jpg",
+                "../images/Scrubs/ScrubClasscFem/ScrubCLFem.jpg"
+            ],
             destaque: false
         },
         {
             id: 'api-7',
-            nome: 'Calça Scrub Jogger',
+            nome: 'Scrub Deluxe Feminino',
             categoria: 'scrubs',
-            preco: 159.90,
-            precoOriginal: null,
-            descricao: 'Calça scrub modelo jogger com punho na barra. Moderna e funcional. Cintura elástica com cordão de ajuste.',
+            preco: 189.90,
+            precoOriginal: 229.90,
+            descricao: 'Modelo sofisticado, com toque leve e caimento elegante, indicado para quem busca diferenciação estética.',
             tamanhos: ['PP', 'P', 'M', 'G', 'GG'],
-            cores: ['Preto', 'Grafite', 'Verde Militar'],
-            imagem: null,
+            cores: ['Vermelho'],
+            imagens: [
+                "../images/Scrubs/ScrubDeluxeFem/ScrubDeluxeFem.jpg",
+                "../images/Scrubs/ScrubDeluxeFem/ScrubDeluxeFem1.jpg",
+                "../images/Scrubs/ScrubDeluxeFem/ScrubDeluxeFem2.jpg",
+                "../images/Scrubs/ScrubDeluxeFem/ScrubDeluxeFem3.jpg"
+            ],
             destaque: false
         },
         {
@@ -150,11 +185,11 @@ async function buscarProdutoSimulado(id) {
             descricao: 'Kit com 10 máscaras N95 de alta proteção. Ajuste perfeito ao rosto. Certificação de qualidade.',
             tamanhos: ['Único'],
             cores: ['Branco'],
-            imagem: null,
+            imagens: [],
             destaque: false
         }
     ];
-    
+
     return produtosApi.find(p => p.id === id) || null;
 }
 
@@ -163,35 +198,27 @@ async function buscarProdutoSimulado(id) {
  */
 function renderizarProduto() {
     const produto = produtoAtual;
-    
-    // Atualiza título da página
+
     document.title = `${produto.nome} - VittaWear`;
-    
-    // Breadcrumb
+
     document.getElementById('breadcrumbProduto').textContent = produto.nome;
-    
-    // Badge de destaque
+
     const badge = document.getElementById('productBadge');
     if (produto.destaque) {
         badge.style.display = 'block';
     }
-    
-    // Imagem
-    const mainImage = document.getElementById('productMainImage');
-    if (produto.imagem) {
-        mainImage.innerHTML = `<img src="${produto.imagem}" alt="${produto.nome}">`;
-    }
-    
-    // Informações básicas
+
+    // Renderiza carrossel
+    renderizarCarrossel(produto.imagens, produto.nome);
+
     document.getElementById('productCategory').textContent = produto.categoria;
     document.getElementById('productTitle').textContent = produto.nome;
     document.getElementById('productPrice').textContent = formatarMoeda(produto.preco);
     document.getElementById('productDescription').textContent = produto.descricao;
-    
-    // Preço original e desconto
+
     const precoOriginal = document.getElementById('productPriceOriginal');
     const desconto = document.getElementById('productDiscount');
-    
+
     if (produto.precoOriginal) {
         precoOriginal.textContent = formatarMoeda(produto.precoOriginal);
         const percentDesconto = Math.round((1 - produto.preco / produto.precoOriginal) * 100);
@@ -200,29 +227,151 @@ function renderizarProduto() {
         precoOriginal.style.display = 'none';
         desconto.style.display = 'none';
     }
-    
-    // Tamanhos
+
     renderizarTamanhos(produto.tamanhos);
-    
-    // Cores
     renderizarCores(produto.cores);
-    
-    // Botões de ação
+
     document.getElementById('addToCartBtn').addEventListener('click', handleAddToCart);
     document.getElementById('buyNowBtn').addEventListener('click', handleBuyNow);
 }
 
+/* ============================================
+   CARROSSEL
+   ============================================ */
+
 /**
- * Renderiza opções de tamanho
+ * Renderiza o carrossel de imagens no lugar do productMainImage
  */
+function renderizarCarrossel(imagens, nomeAlt) {
+    const container = document.getElementById('productMainImage');
+
+    // Se não tiver imagens, mantém o placeholder original
+    if (!imagens || imagens.length === 0) {
+        container.innerHTML = `
+            <div class="product-placeholder">
+                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z" />
+                </svg>
+            </div>`;
+        return;
+    }
+
+    // Se tiver só uma imagem, mostra sem controles
+    if (imagens.length === 1) {
+        container.innerHTML = `<img src="${imagens[0]}" alt="${nomeAlt}">`;
+        return;
+    }
+
+    // Monta o carrossel completo
+    imagemAtual = 0;
+
+    const slides = imagens.map((src, i) => `
+        <div class="carousel-slide ${i === 0 ? 'active' : ''}">
+            <img src="${src}" alt="${nomeAlt} - foto ${i + 1}">
+        </div>
+    `).join('');
+
+    const dots = imagens.map((_, i) => `
+        <button class="carousel-dot ${i === 0 ? 'active' : ''}" 
+                onclick="irParaImagem(${i})" 
+                aria-label="Foto ${i + 1}">
+        </button>
+    `).join('');
+
+    container.innerHTML = `
+        <div class="carousel">
+            <div class="carousel-track" id="carouselTrack">
+                ${slides}
+            </div>
+
+            <button class="carousel-btn carousel-btn-prev" onclick="mudarImagem(-1)" aria-label="Foto anterior">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M15 18l-6-6 6-6"/>
+                </svg>
+            </button>
+
+            <button class="carousel-btn carousel-btn-next" onclick="mudarImagem(1)" aria-label="Próxima foto">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 18l6-6-6-6"/>
+                </svg>
+            </button>
+
+            <div class="carousel-dots">
+                ${dots}
+            </div>
+        </div>
+    `;
+
+    // Suporte a swipe no mobile
+    inicializarSwipe();
+}
+
+/**
+ * Avança ou volta uma imagem (-1 ou +1)
+ */
+function mudarImagem(direcao) {
+    const total = produtoAtual.imagens.length;
+    imagemAtual = (imagemAtual + direcao + total) % total;
+    atualizarCarrossel();
+}
+
+/**
+ * Vai direto para uma imagem pelo índice
+ */
+function irParaImagem(index) {
+    imagemAtual = index;
+    atualizarCarrossel();
+}
+
+/**
+ * Atualiza o estado visual do carrossel
+ */
+function atualizarCarrossel() {
+    const slides = document.querySelectorAll('.carousel-slide');
+    const dots = document.querySelectorAll('.carousel-dot');
+
+    slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === imagemAtual);
+    });
+
+    dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === imagemAtual);
+    });
+}
+
+/**
+ * Suporte a swipe no mobile
+ */
+function inicializarSwipe() {
+    const track = document.getElementById('carouselTrack');
+    if (!track) return;
+
+    let startX = 0;
+
+    track.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+    }, { passive: true });
+
+    track.addEventListener('touchend', (e) => {
+        const diff = startX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 50) {
+            mudarImagem(diff > 0 ? 1 : -1);
+        }
+    }, { passive: true });
+}
+
+/* ============================================
+   RESTO DA PÁGINA (sem alterações)
+   ============================================ */
+
 function renderizarTamanhos(tamanhos) {
     const container = document.getElementById('sizeOptions');
-    
+
     if (!tamanhos || tamanhos.length === 0) {
         container.parentElement.style.display = 'none';
         return;
     }
-    
+
     container.innerHTML = tamanhos.map((tamanho, index) => `
         <button type="button" 
                 class="size-option ${index === 0 ? 'active' : ''}" 
@@ -230,11 +379,9 @@ function renderizarTamanhos(tamanhos) {
             ${tamanho}
         </button>
     `).join('');
-    
-    // Define tamanho inicial
+
     tamanhoSelecionado = tamanhos[0];
-    
-    // Event listeners
+
     container.querySelectorAll('.size-option').forEach(btn => {
         btn.addEventListener('click', () => {
             container.querySelectorAll('.size-option').forEach(b => b.classList.remove('active'));
@@ -244,18 +391,15 @@ function renderizarTamanhos(tamanhos) {
     });
 }
 
-/**
- * Renderiza opções de cor
- */
 function renderizarCores(cores) {
     const container = document.getElementById('colorOptions');
     const containerWrapper = document.getElementById('colorOptionContainer');
-    
+
     if (!cores || cores.length === 0) {
         containerWrapper.style.display = 'none';
         return;
     }
-    
+
     container.innerHTML = cores.map((cor, index) => `
         <button type="button" 
                 class="color-option ${index === 0 ? 'active' : ''}" 
@@ -263,11 +407,9 @@ function renderizarCores(cores) {
             ${cor}
         </button>
     `).join('');
-    
-    // Define cor inicial
+
     corSelecionada = cores[0];
-    
-    // Event listeners
+
     container.querySelectorAll('.color-option').forEach(btn => {
         btn.addEventListener('click', () => {
             container.querySelectorAll('.color-option').forEach(b => b.classList.remove('active'));
@@ -277,21 +419,18 @@ function renderizarCores(cores) {
     });
 }
 
-/**
- * Inicializa controles de quantidade
- */
 function inicializarQuantidade() {
     const minusBtn = document.getElementById('qtyMinus');
     const plusBtn = document.getElementById('qtyPlus');
     const input = document.getElementById('quantity');
-    
+
     minusBtn?.addEventListener('click', () => {
         if (quantidade > 1) {
             quantidade--;
             input.value = quantidade;
         }
     });
-    
+
     plusBtn?.addEventListener('click', () => {
         if (quantidade < 10) {
             quantidade++;
@@ -300,40 +439,17 @@ function inicializarQuantidade() {
     });
 }
 
-/**
- * Handler para adicionar ao carrinho
- */
 async function handleAddToCart() {
     if (!produtoAtual) return;
-    
-    await adicionarAoCarrinho(
-        produtoAtual.id, 
-        quantidade, 
-        tamanhoSelecionado, 
-        corSelecionada
-    );
+    await adicionarAoCarrinho(produtoAtual.id, quantidade, tamanhoSelecionado, corSelecionada);
 }
 
-/**
- * Handler para comprar agora
- */
 async function handleBuyNow() {
     if (!produtoAtual) return;
-    
-    await adicionarAoCarrinho(
-        produtoAtual.id, 
-        quantidade, 
-        tamanhoSelecionado, 
-        corSelecionada
-    );
-    
-    // Redireciona para o carrinho
+    await adicionarAoCarrinho(produtoAtual.id, quantidade, tamanhoSelecionado, corSelecionada);
     window.location.href = 'carrinho.html';
 }
 
-/**
- * Mostra estado de produto não encontrado
- */
 function mostrarNaoEncontrado() {
     document.getElementById('loadingProduto').style.display = 'none';
     document.getElementById('productDetail').style.display = 'none';
