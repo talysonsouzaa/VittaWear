@@ -421,6 +421,7 @@
     padding: var(--spacing-3xl);
     text-align: center;
     color: white;
+
 }
 
 .cta-section h2 {
@@ -428,6 +429,7 @@
     font-size: 2rem;
     font-weight: 700;
     margin-bottom: var(--spacing-md);
+    color: white;
 }
 
 .cta-section p {
@@ -485,15 +487,15 @@
     .sobre-hero {
         gap: var(--spacing-2xl);
     }
-    
+
     .valores-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-    
+
     .equipe-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-    
+
     .stats-section {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -503,59 +505,59 @@
     .page-header {
         padding: calc(70px + var(--spacing-xl)) 0 var(--spacing-lg);
     }
-    
+
     .page-header h1 {
         font-size: 1.5rem;
     }
-    
+
     .sobre-hero {
         grid-template-columns: 1fr;
     }
-    
+
     .sobre-hero-content h2 {
         font-size: 1.75rem;
     }
-    
+
     .sobre-hero-image {
         order: -1;
     }
-    
+
     .missao-visao {
         grid-template-columns: 1fr;
     }
-    
+
     .valores-section {
         padding: var(--spacing-2xl);
     }
-    
+
     .section-header h2 {
         font-size: 1.5rem;
     }
-    
+
     .historia-content {
         grid-template-columns: 1fr;
     }
-    
+
     .historia-image {
         order: -1;
     }
-    
+
     .equipe-section {
         padding: var(--spacing-2xl);
     }
-    
+
     .cta-section {
         padding: var(--spacing-2xl);
     }
-    
+
     .cta-section h2 {
         font-size: 1.5rem;
     }
-    
+
     .cta-buttons {
         flex-direction: column;
     }
-    
+
     .cta-btn {
         justify-content: center;
     }
@@ -565,15 +567,15 @@
     .valores-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .equipe-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .stats-section {
         grid-template-columns: 1fr;
     }
-    
+
     .stat-item .number {
         font-size: 2rem;
     }

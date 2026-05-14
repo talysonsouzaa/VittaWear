@@ -8,52 +8,72 @@
  */
 const PRODUTOS_FIXOS = [
     {
-        id: 'fixo-1',
-        nome: 'Scrub Premium Verde Oliva',
+        id: 'api-1',
+        nome: 'Scrub Standard Masculino',
         categoria: 'scrubs',
-        preco: 289.90,
-        precoOriginal: 349.90,
-        descricao: 'Conjunto de scrub premium confeccionado em tecido dry-fit de alta qualidade. Proporciona conforto térmico e liberdade de movimentos durante todo o dia de trabalho.',
-        tamanhos: ['P', 'M', 'G', 'GG'],
-        cores: ['Verde Oliva', 'Azul Marinho', 'Cinza'],
-        imagem: null,
-        destaque: true
+        preco: 124.90,
+        precoOriginal: null,
+        descricao: 'Scrub masculino funcional e resistente, ideal para o dia a dia acadêmico e hospitalar, garantindo conforto e mobilidade.',
+        tamanhos: ['P', 'M', 'G', 'GG', 'XG'],
+        cores: ['Azul Marinho', 'Verde Escuro'],
+        imagens: [
+            "../images/Scrubs/ScrubStandardMasc/ScrubMasc.jpg",
+            "../images/Scrubs/ScrubStandardMasc/ScrubMasc1.jpg",
+            "../images/Scrubs/ScrubStandardMasc/ScrubMasc2.jpg",
+            "../images/Scrubs/ScrubStandardMasc/ScrubMasc3.jpg"
+        ],
+        destaque: false
     },
     {
         id: 'fixo-2',
-        nome: 'Jaleco Feminino Elegance',
+        nome: 'Jaleco Classic Gabardine',
         categoria: 'jalecos',
-        preco: 349.90,
+        preco: 129.90,
         precoOriginal: null,
-        descricao: 'Jaleco feminino com corte acinturado e detalhes em dourado fosco. Design exclusivo que une elegância e funcionalidade para profissionais que valorizam a estética.',
+        descricao: 'Modelo masculino com visual alinhado e maior resistência, indicado para uso profissional contínuo.',
         tamanhos: ['P', 'M', 'G', 'GG'],
         cores: ['Branco', 'Off-White'],
-        imagem: null,
-        destaque: true
+        imagens: [
+            "../images/Jalecos/JalecoMasc.jpg",
+            "../images/Jalecos/JalecoMasc1.jpg",
+            "../images/Jalecos/JalecoMasc2.jpg",
+            "../images/Jalecos/JalecoMasc3.jpg",
+        ],
+        destaque: false
     },
     {
         id: 'fixo-3',
-        nome: 'Conjunto Scrub Classic',
+        nome: 'Conjunto Scrub Basic Feminino',
         categoria: 'scrubs',
-        preco: 249.90,
-        precoOriginal: 299.90,
-        descricao: 'O clássico que nunca sai de moda. Conjunto scrub com modelagem confortável, bolsos funcionais e tecido que não amassa. Perfeito para longas jornadas.',
-        tamanhos: ['PP', 'P', 'M', 'G', 'GG', 'XG'],
-        cores: ['Azul Petróleo', 'Verde Água', 'Grafite'],
-        imagem: null,
-        destaque: true
+        preco: 99.90,
+        precoOriginal: null,
+        descricao: 'Confeccionado em Oxfordine, o conjunto Basic é leve, macio e não amassa, garantindo conforto ao longo do dia. Possui blusa com decote em V e bolsos funcionais, além de calça com cós elástico para melhor ajuste. ✨ Ideal para quem busca elegância e praticidade na rotina profissional.',
+        tamanhos: ['PP', 'P', 'M', 'G', 'GG'],
+        cores: ['Rosa Coral'],
+        imagens: [
+            "../images/Scrubs/ScrubBasicFem/ScrubBaFem.jpg",
+            "../images/Scrubs/ScrubBasicFem/ScrubBaFem1.jpg",
+            "../images/Scrubs/ScrubBasicFem/ScrubBaFem2.jpg",
+            "../images/Scrubs/ScrubBasicFem/ScrubBaFem3.jpg",
+        ],
+        destaque: false
     },
     {
         id: 'fixo-4',
-        nome: 'Jaleco Masculino Executive',
-        categoria: 'jalecos',
-        preco: 379.90,
+        nome: 'Scrub Moove Feminino',
+        categoria: 'scrubs',
+        preco: 239.90,
         precoOriginal: null,
-        descricao: 'Jaleco masculino de corte reto com acabamento premium. Tecido com tratamento antimicrobiano e resistente a manchas. A escolha dos profissionais exigentes.',
-        tamanhos: ['P', 'M', 'G', 'GG', 'XG'],
-        cores: ['Branco', 'Azul Claro'],
-        imagem: null,
-        destaque: true
+        descricao: 'Scrub desenvolvido para ambiente cirúrgico. Tecido com tratamento antimicrobiano avançado. Costuras seladas e acabamento de alta qualidade.',
+        tamanhos: ['PP', 'P', 'M', 'G', 'GG'],
+        cores: ['Verde Oliva', 'Azul Royal'],
+        imagens: [
+            "../images/Scrubs/ScrubMooveFem/ScrubMoFem.jpg",
+            "../images/Scrubs/ScrubMooveFem/ScrubMoFem1.jpg",
+            "../images/Scrubs/ScrubMooveFem/ScrubMoFem2.jpg",
+            "../images/Scrubs/ScrubMooveFem/ScrubMoFem3.jpg",
+        ],
+        destaque: false
     }
 ];
 
@@ -75,8 +95,7 @@ function formatarMoeda(valor) {
  * @returns {string}
  */
 function gerarUrlProduto(id) {
-    const basePath = window.location.pathname.includes('/pages/') ? '' : 'pages/';
-    return `${basePath}produto.html?id=${id}`;
+    return `produto.html?id=${id}`;
 }
 
 /**
@@ -100,7 +119,7 @@ async function buscarProdutoPorId(id) {
     if (produtoFixo) {
         return produtoFixo;
     }
-    
+
     // Se não encontrou, busca na API
     try {
         const response = await fetch(`/api/produtos/${id}`);
@@ -110,7 +129,7 @@ async function buscarProdutoPorId(id) {
     } catch (error) {
         console.error('Erro ao buscar produto:', error);
     }
-    
+
     return null;
 }
 
@@ -123,15 +142,15 @@ async function buscarProdutosApi(filtros = {}) {
     try {
         let url = '/api/produtos';
         const params = new URLSearchParams();
-        
+
         if (filtros.categoria) {
             params.append('categoria', filtros.categoria);
         }
-        
+
         if (params.toString()) {
             url += '?' + params.toString();
         }
-        
+
         const response = await fetch(url);
         if (response.ok) {
             return await response.json();
@@ -139,7 +158,7 @@ async function buscarProdutosApi(filtros = {}) {
     } catch (error) {
         console.error('Erro ao buscar produtos:', error);
     }
-    
+
     return [];
 }
 
@@ -151,22 +170,24 @@ async function buscarProdutosApi(filtros = {}) {
 function renderizarCardProduto(produto) {
     const urlProduto = gerarUrlProduto(produto.id);
     const badge = produto.destaque ? '<span class="product-badge">Destaque</span>' : '';
-    const precoOriginal = produto.precoOriginal 
-        ? `<span class="original">${formatarMoeda(produto.precoOriginal)}</span>` 
+    const precoOriginal = produto.precoOriginal
+        ? `<span class="original">${formatarMoeda(produto.precoOriginal)}</span>`
         : '';
-    
+
+    const primeiraImagem = produto.imagens && produto.imagens.length > 0 ? produto.imagens[0] : null;
+
     return `
         <article class="product-card" onclick="window.location.href='${urlProduto}'">
             <div class="product-image">
                 ${badge}
-                ${produto.imagem 
-                    ? `<img src="${produto.imagem}" alt="${produto.nome}">` 
-                    : `<div class="product-placeholder">
+                ${primeiraImagem
+            ? `<img src="${primeiraImagem}" alt="${produto.nome}">`
+            : `<div class="product-placeholder">
                         <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/>
                         </svg>
                     </div>`
-                }
+        }
                 <div class="product-actions">
                     <button onclick="event.stopPropagation(); adicionarAoCarrinho('${produto.id}')" aria-label="Adicionar ao carrinho">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -200,7 +221,7 @@ function mostrarNotificacao(mensagem, tipo = 'success') {
     if (existente) {
         existente.remove();
     }
-    
+
     const toast = document.createElement('div');
     toast.className = `toast-notification toast-${tipo}`;
     toast.innerHTML = `
@@ -212,7 +233,7 @@ function mostrarNotificacao(mensagem, tipo = 'success') {
             </svg>
         </button>
     `;
-    
+
     // Estilos inline para o toast
     toast.style.cssText = `
         position: fixed;
@@ -229,7 +250,7 @@ function mostrarNotificacao(mensagem, tipo = 'success') {
         z-index: 9999;
         animation: slideIn 0.3s ease;
     `;
-    
+
     // Adiciona keyframes se não existir
     if (!document.querySelector('#toast-styles')) {
         const style = document.createElement('style');
@@ -248,9 +269,9 @@ function mostrarNotificacao(mensagem, tipo = 'success') {
         `;
         document.head.appendChild(style);
     }
-    
+
     document.body.appendChild(toast);
-    
+
     // Remove automaticamente após 3 segundos
     setTimeout(() => {
         toast.style.animation = 'slideIn 0.3s ease reverse';
@@ -265,7 +286,7 @@ function inicializarNavbar() {
     const navbar = document.getElementById('navbar');
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const navLinks = document.getElementById('navLinks');
-    
+
     // Scroll effect
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
@@ -274,13 +295,13 @@ function inicializarNavbar() {
             navbar?.classList.remove('scrolled');
         }
     });
-    
+
     // Mobile menu toggle
     mobileMenuBtn?.addEventListener('click', () => {
         mobileMenuBtn.classList.toggle('active');
         navLinks?.classList.toggle('active');
     });
-    
+
     // Fecha menu ao clicar em link
     navLinks?.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
