@@ -3,10 +3,12 @@ Vittawear E-commerce
 Sistema de e-commerce desenvolvido para a marca Vittawear, especializada em vestuário para profissionais da área da saúde.
 
 Sobre o projeto
+
 Aplicação web desenvolvida para atender a necessidade de comercialização de produtos, com foco em funcionalidade, organização e aplicação prática em um cenário real.
 O sistema realiza autenticação de usuários, processamento de dados e integração entre frontend e backend.
 
 Linguagens utilizadas
+
 HTML
 CSS
 JavaScript
@@ -25,6 +27,7 @@ Durante o desenvolvimento, foram utilizadas ferramentas de Inteligência Artific
 A base inicial do projeto contou com o uso do Claude Code, sendo posteriormente adaptada, expandida e refinada com implementações próprias, aplicando lógica de programação e personalizações voltadas às necessidades do projeto.
 
 Objetivo
+
 Desenvolver uma aplicação funcional voltada para uso real, atendendo às necessidades de um cliente e consolidando práticas de desenvolvimento web.
 
 Autor
