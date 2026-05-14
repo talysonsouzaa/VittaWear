@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Conta — VittaWear</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --green: #768857;
+            --green-dark: #5d6b44;
+            --green-light: #8fa068;
+            --green-pale: #eef2e9;
+            --gold: #C2A878;
+            --gold-dark: #a89060;
+            --gold-pale: #faf6ef;
+            --text: #2e2e2e;
+            --text-muted: #888;
+            --border: #e4e4e0;
+            --surface: #fff;
+            --bg: #f7f6f2;
+            --error: #c0392b;
+            --success: #27ae60;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ── Header ── */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(247, 246, 242, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 2rem;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--green);
+            letter-spacing: 0.04em;
+            text-decoration: none;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 0.4rem;
+            align-items: center;
+        }
+
+        .header-nav a {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 0.4rem 0.75rem;
+            border-radius: 6px;
+            transition: color 0.2s, background 0.2s;
+        }
+
+        .header-nav a:hover {
+            color: var(--green);
+            background: var(--green-pale);
+        }
+
+        .nav-cta {
+            background: var(--green) !important;
+            color: white !important;
+            font-weight: 500;
+        }
+
+        .nav-cta:hover {
+            background: var(--green-dark) !important;
+        }
+
+        /* ── Page Layout ── */
+        .page {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: calc(100vh - 64px);
+        }
+
+        /* ── Left Panel ── */
+        .panel-left {
+            background: linear-gradient(160deg, var(--green-dark) 0%, var(--green) 60%, #8fa068 100%);
+            padding: 4rem 3.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .panel-left::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .panel-left::after {
+            content: '';
+            position: absolute;
+            bottom: -60px;
+            left: -60px;
+            width: 240px;
+            height: 240px;
+            border-radius: 50%;
+            background: rgba(194, 168, 120, 0.12);
+        }
+
+        .panel-brand {
+            position: relative;
+            z-index: 1;
+        }
+
+        .brand-eyebrow {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 1.25rem;
+        }
+
+        .brand-headline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.2rem;
+            font-weight: 300;
+            color: #fff;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+        }
+
+        .brand-headline em {
+            font-style: italic;
+            color: var(--gold);
+        }
+
+        .brand-desc {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.75);
+            line-height: 1.75;
+            max-width: 360px;
+            margin-bottom: 3rem;
+        }
+
+        .perks {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .perk {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+        }
+
+        .perk-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .perk-icon svg {
+            color: var(--gold);
+        }
+
+        .perk-text {
+            font-size: 0.88rem;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .perk-text strong {
+            display: block;
+            font-weight: 500;
+            color: #fff;
+            margin-bottom: 0.1rem;
+        }
+
+        /* ── Right Panel / Form ── */
+        .panel-right {
+            background: var(--surface);
+            padding: 3.5rem 3.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow-y: auto;
+        }
+
+        .form-header {
+            margin-bottom: 2.25rem;
+        }
+
+        .form-header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.25rem;
+            font-weight: 500;
+            color: var(--text);
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-header p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Social login */
+        .social-row {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .btn-social {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            height: 44px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.88rem;
+            font-weight: 500;
+            color: var(--text);
+            background: var(--surface);
+            cursor: pointer;
+            transition: border-color 0.2s, background 0.2s, transform 0.15s;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .btn-social:hover {
+            border-color: var(--green-light);
+            background: var(--green-pale);
+            transform: translateY(-1px);
+        }
+
+        /* Divider */
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.75rem;
+            color: var(--text-muted);
+            font-size: 0.82rem;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        /* Form */
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.1rem;
+        }
+
+        label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 0.4rem;
+            letter-spacing: 0.01em;
+        }
+
+        .input-wrap {
+            position: relative;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="password"] {
+            width: 100%;
+            height: 44px;
+            padding: 0 1rem;
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.92rem;
+            font-family: 'DM Sans', sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: var(--green);
+            box-shadow: 0 0 0 3px rgba(118, 136, 87, 0.12);
+            background: #fff;
+        }
+
+        input.error {
+            border-color: var(--error);
+            box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.1);
+        }
+
+        input.valid {
+            border-color: var(--success);
+        }
+
+        input::placeholder {
+            color: #bbb;
+        }
+
+        .input-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+            color: var(--text-muted);
+        }
+
+        .toggle-pw {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-muted);
+            display: flex;
+            padding: 0;
+            transition: color 0.2s;
+        }
+
+        .toggle-pw:hover {
+            color: var(--green);
+        }
+
+        .error-msg {
+            font-size: 0.78rem;
+            color: var(--error);
+            margin-top: 0.3rem;
+            min-height: 1rem;
+            display: block;
+        }
+
+        /* Password strength */
+        .strength-wrap {
+            margin-top: 0.5rem;
+        }
+
+        .strength-track {
+            height: 3px;
+            background: var(--border);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 0.35rem;
+        }
+
+        .strength-fill {
+            height: 100%;
+            width: 0;
+            border-radius: 2px;
+            transition: width 0.4s ease, background-color 0.3s;
+        }
+
+        .strength-fill.weak {
+            width: 33%;
+            background: var(--error);
+        }
+
+        .strength-fill.medium {
+            width: 66%;
+            background: var(--gold);
+        }
+
+        .strength-fill.strong {
+            width: 100%;
+            background: var(--success);
+        }
+
+        .strength-label {
+            font-size: 0.76rem;
+            color: var(--text-muted);
+        }
+
+        /* Checkboxes */
+        .check-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .check-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            cursor: pointer;
+            font-size: 0.84rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .check-label input[type="checkbox"] {
+            display: none;
+        }
+
+        .checkmark {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+            border: 1.5px solid var(--border);
+            border-radius: 4px;
+            background: var(--bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 2px;
+            transition: all 0.2s;
+        }
+
+        .check-label input:checked+.checkmark {
+            background: var(--green);
+            border-color: var(--green);
+        }
+
+        .check-label input:checked+.checkmark svg {
+            opacity: 1;
+        }
+
+        .checkmark svg {
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .check-label a {
+            color: var(--green);
+            text-decoration: underline;
+        }
+
+        /* Submit button */
+        .btn-submit {
+            width: 100%;
+            height: 50px;
+            background: var(--green);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            font-family: 'DM Sans', sans-serif;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+            margin-bottom: 1.25rem;
+            letter-spacing: 0.02em;
+        }
+
+        .btn-submit:hover {
+            background: var(--green-dark);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(118, 136, 87, 0.3);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        .btn-submit.loading {
+            pointer-events: none;
+            opacity: 0.8;
+        }
+
+        .spinner {
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255, 255, 255, 0.35);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            display: none;
+        }
+
+        .btn-submit.loading .spinner {
+            display: block;
+        }
+
+        .btn-submit.loading .btn-text {
+            display: none;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .login-link {
+            text-align: center;
+            font-size: 0.87rem;
+            color: var(--text-muted);
+        }
+
+        .login-link a {
+            color: var(--green);
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Notification toast */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--text);
+            color: #fff;
+            padding: 0.9rem 1.4rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            z-index: 1000;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            max-width: 320px;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast.success {
+            background: var(--success);
+        }
+
+        .toast.error {
+            background: var(--error);
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .page {
+                grid-template-columns: 1fr;
+            }
+
+            .panel-left {
+                display: none;
+            }
+
+            .panel-right {
+                padding: 2.5rem 1.75rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .panel-right {
+                padding: 2rem 1.25rem;
+            }
+
+            .social-row {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <a href="../index.html" class="logo">VittaWear</a>
+        <nav class="header-nav">
+            <a href="produtos.html">Produtos</a>
+            <a href="sobre.html">Sobre</a>
+            <a href="login.html" class="nav-cta">Entrar</a>
+        </nav>
+    </header>
+
+    <!-- Page -->
+    <div class="page">
+
+        <!-- Left: Brand panel -->
+        <div class="panel-left">
+            <div class="panel-brand">
+                <p class="brand-eyebrow">VittaWear — Moda com propósito</p>
+                <h2 class="brand-headline">Vista-se com<br><em>confiança</em><br>e estilo</h2>
+                <p class="brand-desc">Crie sua conta e tenha acesso a coleções exclusivas, ofertas personalizadas e uma
+                    experiência de compra pensada para você.</p>
+
+                <div class="perks">
+                    <div class="perk">
+                        <div class="perk-icon">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path d="M20 12V22H4V12" />
+                                <path d="M22 7H2v5h20V7z" />
+                                <path d="M12 22V7" />
+                                <path d="M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7z" />
+                                <path d="M12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z" />
+                            </svg>
+                        </div>
+                        <div class="perk-text">
+                            <strong>Frete grátis</strong>
+                            Em compras acima de R$ 299 para todo o Brasil
+                        </div>
+                    </div>
+                    <div class="perk">
+                        <div class="perk-icon">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <polyline points="20 12 20 22 4 22 4 12" />
+                                <rect x="2" y="7" width="20" height="5" />
+                                <line x1="12" y1="22" x2="12" y2="7" />
+                                <path d="M12 7H7.5A2.5 2.5 0 015 4.5C5 3.1 6.1 2 7.5 2c2.5 0 4.5 5 4.5 5z" />
+                                <path d="M12 7h4.5A2.5 2.5 0 0019 4.5C19 3.1 17.9 2 16.5 2 14 2 12 7 12 7z" />
+                            </svg>
+                        </div>
+                        <div class="perk-text">
+                            <strong>Ofertas exclusivas</strong>
+                            Membros recebem descontos antecipados em lançamentos
+                        </div>
+                    </div>
+                    <div class="perk">
+                        <div class="perk-icon">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+                            </svg>
+                        </div>
+                        <div class="perk-text">
+                            <strong>Atendimento prioritário</strong>
+                            Suporte via WhatsApp com resposta em até 1h
+                        </div>
+                    </div>
+                    <div class="perk">
+                        <div class="perk-icon">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                            </svg>
+                        </div>
+                        <div class="perk-text">
+                            <strong>Compra 100% segura</strong>
+                            Dados protegidos com criptografia SSL
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right: Form panel -->
+        <div class="panel-right">
+            <div class="form-header">
+                <h1>Criar conta</h1>
+                <p>Rápido, gratuito e sem complicações.</p>
+            </div>
+
+            <!-- Social -->
+            <div class="social-row">
+                <button class="btn-social" type="button">
+                    <svg width="18" height="18" viewBox="0 0 24 24">
+                        <path fill="#4285F4"
+                            d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                        <path fill="#34A853"
+                            d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                        <path fill="#FBBC05"
+                            d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                        <path fill="#EA4335"
+                            d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                    </svg>
+                    Continuar com Google
+                </button>
+            </div>
+
+            <div class="divider">ou preencha os dados</div>
+
+            <!-- Form -->
+            <form id="registerForm" novalidate>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">Nome</label>
+                        <input type="text" id="firstName" placeholder="Seu nome" autocomplete="given-name">
+                        <span class="error-msg" id="firstNameError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Sobrenome</label>
+                        <input type="text" id="lastName" placeholder="Seu sobrenome" autocomplete="family-name">
+                        <span class="error-msg" id="lastNameError"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <div class="input-wrap">
+                        <input type="email" id="email" placeholder="seu@email.com" autocomplete="email">
+                        <span class="input-icon" id="emailIcon"></span>
+                    </div>
+                    <span class="error-msg" id="emailError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Telefone <span style="color:#bbb;font-weight:400">(opcional)</span></label>
+                    <input type="tel" id="phone" placeholder="(31) 99999-9999" autocomplete="tel">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <div class="input-wrap">
+                        <input type="password" id="password" placeholder="Mínimo 6 caracteres"
+                            autocomplete="new-password">
+                        <button type="button" class="toggle-pw" id="togglePw" aria-label="Mostrar senha">
+                            <svg id="eyeOpen" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
+                            <svg id="eyeClosed" width="18" height="18" fill="none" stroke="currentColor"
+                                stroke-width="2" viewBox="0 0 24 24" style="display:none">
+                                <path
+                                    d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24" />
+                                <line x1="1" y1="1" x2="23" y2="23" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="strength-wrap">
+                        <div class="strength-track">
+                            <div class="strength-fill" id="strengthFill"></div>
+                        </div>
+                        <span class="strength-label" id="strengthLabel">Use letras, números e símbolos</span>
+                    </div>
+                    <span class="error-msg" id="passwordError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Confirmar senha</label>
+                    <div class="input-wrap">
+                        <input type="password" id="confirmPassword" placeholder="Repita a senha"
+                            autocomplete="new-password">
+                        <button type="button" class="toggle-pw" id="togglePw2" aria-label="Mostrar senha">
+                            <svg class="eyeOpen2" width="18" height="18" fill="none" stroke="currentColor"
+                                stroke-width="2" viewBox="0 0 24 24">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
+                            <svg class="eyeClosed2" width="18" height="18" fill="none" stroke="currentColor"
+                                stroke-width="2" viewBox="0 0 24 24" style="display:none">
+                                <path
+                                    d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24" />
+                                <line x1="1" y1="1" x2="23" y2="23" />
+                            </svg>
+                        </button>
+                    </div>
+                    <span class="error-msg" id="confirmError"></span>
+                </div>
+
+                <div class="check-group">
+                    <label class="check-label">
+                        <input type="checkbox" id="terms">
+                        <span class="checkmark">
+                            <svg width="10" height="8" fill="none" stroke="#fff" stroke-width="2.5" viewBox="0 0 10 8">
+                                <polyline points="1,4 3.5,6.5 9,1" />
+                            </svg>
+                        </span>
+                        Li e aceito os <a href="#">Termos de Uso</a> e a <a href="#">Política de Privacidade</a>
+                    </label>
+                    <label class="check-label">
+                        <input type="checkbox" id="newsletter">
+                        <span class="checkmark">
+                            <svg width="10" height="8" fill="none" stroke="#fff" stroke-width="2.5" viewBox="0 0 10 8">
+                                <polyline points="1,4 3.5,6.5 9,1" />
+                            </svg>
+                        </span>
+                        Quero receber novidades e promoções por e-mail
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-submit" id="submitBtn">
+                    <div class="spinner"></div>
+                    <span class="btn-text">Criar minha conta</span>
+                </button>
+
+                <p class="login-link">Já tem uma conta? <a href="login.html">Entrar</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"
+            id="toastIcon">
+            <polyline points="20,6 9,17 4,12" />
+        </svg>
+        <span id="toastMsg"></span>
+    </div>
+
+    <!-- auth.js deve vir antes deste script -->
+    <script src="../js/auth.js"></script>
+
+    <script>
+        (function () {
+
+            // Se já estiver logado, manda pra home
+            document.addEventListener('DOMContentLoaded', redirecionarSeLogado);
+
+            // Toggle password
+            function setupToggle(btnId, inputId, openSel, closedSel) {
+                const btn = document.getElementById(btnId);
+                const inp = document.getElementById(inputId);
+                btn.addEventListener('click', () => {
+                    const show = inp.type === 'password';
+                    inp.type = show ? 'text' : 'password';
+                    btn.querySelector(openSel).style.display = show ? 'none' : '';
+                    btn.querySelector(closedSel).style.display = show ? '' : 'none';
+                });
+            }
+            setupToggle('togglePw', 'password', '#eyeOpen', '#eyeClosed');
+
+            const btn2 = document.getElementById('togglePw2');
+            const inp2 = document.getElementById('confirmPassword');
+            btn2.addEventListener('click', () => {
+                const show = inp2.type === 'password';
+                inp2.type = show ? 'text' : 'password';
+                btn2.querySelector('.eyeOpen2').style.display = show ? 'none' : '';
+                btn2.querySelector('.eyeClosed2').style.display = show ? '' : 'none';
+            });
+
+            // Phone mask
+            document.getElementById('phone').addEventListener('input', function (e) {
+                let v = e.target.value.replace(/\D/g, '').slice(0, 11);
+                if (v.length > 0) v = '(' + v;
+                if (v.length > 3) v = v.slice(0, 3) + ') ' + v.slice(3);
+                if (v.length > 10) v = v.slice(0, 10) + '-' + v.slice(10);
+                e.target.value = v;
+            });
+
+            // Password strength
+            const pwInput = document.getElementById('password');
+            const fill = document.getElementById('strengthFill');
+            const label = document.getElementById('strengthLabel');
+
+            pwInput.addEventListener('input', function () {
+                const v = this.value;
+                if (!v) {
+                    fill.className = 'strength-fill';
+                    fill.style.width = '0';
+                    label.textContent = 'Use letras, números e símbolos';
+                    label.style.color = '';
+                    return;
+                }
+                let score = 0;
+                if (v.length >= 6) score++;
+                if (v.length >= 10) score++;
+                if (/[a-z]/.test(v) && /[A-Z]/.test(v)) score++;
+                if (/[0-9]/.test(v)) score++;
+                if (/[^a-zA-Z0-9]/.test(v)) score++;
+
+                if (score < 2) {
+                    fill.className = 'strength-fill weak';
+                    label.textContent = 'Senha fraca';
+                    label.style.color = 'var(--error)';
+                } else if (score < 4) {
+                    fill.className = 'strength-fill medium';
+                    label.textContent = 'Senha média';
+                    label.style.color = 'var(--gold-dark)';
+                } else {
+                    fill.className = 'strength-fill strong';
+                    label.textContent = 'Senha forte';
+                    label.style.color = 'var(--success)';
+                }
+            });
+
+            // Email live validation
+            const emailInp = document.getElementById('email');
+            const emailIcon = document.getElementById('emailIcon');
+            emailInp.addEventListener('blur', function () {
+                if (this.value && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.value)) {
+                    this.classList.add('valid');
+                    emailIcon.innerHTML = '<svg width="16" height="16" fill="none" stroke="#27ae60" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>';
+                } else if (this.value) {
+                    this.classList.add('error');
+                    emailIcon.innerHTML = '';
+                }
+            });
+            emailInp.addEventListener('focus', function () {
+                this.classList.remove('error', 'valid');
+                emailIcon.innerHTML = '';
+            });
+
+            // Toast
+            function showToast(msg, type = 'success') {
+                const t = document.getElementById('toast');
+                const icon = document.getElementById('toastIcon');
+                document.getElementById('toastMsg').textContent = msg;
+                t.className = 'toast ' + type;
+                icon.innerHTML = type === 'error'
+                    ? '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>'
+                    : '<polyline points="20,6 9,17 4,12"/>';
+                t.classList.add('show');
+                setTimeout(() => t.classList.remove('show'), 3500);
+            }
+
+            // Validate field helper
+            function setError(inputId, msgId, msg) {
+                const inp = document.getElementById(inputId);
+                const err = document.getElementById(msgId);
+                if (msg) {
+                    inp.classList.add('error');
+                    err.textContent = msg;
+                    return false;
+                } else {
+                    inp.classList.remove('error');
+                    err.textContent = '';
+                    return true;
+                }
+            }
+
+            // Form submit — chama a API real
+            document.getElementById('registerForm').addEventListener('submit', async function (e) {
+                e.preventDefault();
+
+                const firstName = document.getElementById('firstName').value.trim();
+                const lastName = document.getElementById('lastName').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const phone = document.getElementById('phone').value.trim();
+                const password = document.getElementById('password').value;
+                const confirm = document.getElementById('confirmPassword').value;
+                const terms = document.getElementById('terms').checked;
+                const newsCheck = document.getElementById('newsletter').checked;
+
+                // Validação frontend
+                let ok = true;
+                ok = setError('firstName', 'firstNameError', firstName.length < 2 ? 'Nome deve ter pelo menos 2 caracteres' : '') && ok;
+                ok = setError('lastName', 'lastNameError', lastName.length < 2 ? 'Sobrenome deve ter pelo menos 2 caracteres' : '') && ok;
+                ok = setError('email', 'emailError', !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? 'Informe um e-mail válido' : '') && ok;
+                ok = setError('password', 'passwordError', password.length < 6 ? 'A senha deve ter no mínimo 6 caracteres' : '') && ok;
+                ok = setError('confirmPassword', 'confirmError', password !== confirm ? 'As senhas não coincidem' : '') && ok;
+
+                if (!terms) {
+                    showToast('Aceite os Termos de Uso para continuar', 'error');
+                    ok = false;
+                }
+                if (!ok) return;
+
+                // Loading no botão
+                const btn = document.getElementById('submitBtn');
+                btn.classList.add('loading');
+
+                // Chama a API
+                const resultado = await cadastrarUsuario({
+                    nome: `${firstName} ${lastName}`,
+                    email: email,
+                    senha: password,
+                    telefone: phone,
+                });
+
+                btn.classList.remove('loading');
+
+                if (resultado.sucesso) {
+                    // Se marcou newsletter, cadastra também
+                    if (newsCheck) {
+                        fetch('http://localhost:5000/api/newsletter', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ email }),
+                        }).catch(() => { }); // silencia erro de newsletter
+                    }
+
+                    showToast('Conta criada com sucesso! Bem-vindo(a) à VittaWear 🎉', 'success');
+                    setTimeout(() => { window.location.href = 'index.html'; }, 2000);
+                } else {
+                    // Mostra o erro vindo da API (ex: "E-mail já cadastrado")
+                    showToast(resultado.mensagem, 'error');
+
+                    // Destaca o campo de e-mail se for erro de duplicidade
+                    if (resultado.mensagem.toLowerCase().includes('e-mail')) {
+                        setError('email', 'emailError', resultado.mensagem);
+                    }
+                }
+            });
+
+            // Limpa erros ao digitar
+            ['firstName', 'lastName', 'email', 'password', 'confirmPassword'].forEach(id => {
+                document.getElementById(id)?.addEventListener('input', () => {
+                    document.getElementById(id).classList.remove('error');
+                    const errId = id === 'confirmPassword' ? 'confirmError' : id + 'Error';
+                    const err = document.getElementById(errId);
+                    if (err) err.textContent = '';
+                });
+            });
+
+        })();
+    </script>
+</body>
+
+</html>

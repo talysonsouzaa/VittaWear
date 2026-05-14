@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Perfil - VittaWear</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/styles.css">
+
+    <style>
+        .perfil-page {
+            min-height: 100vh;
+            padding: 120px 0 60px;
+            background: var(--color-bg, #f5f5f5);
+        }
+
+        .perfil-container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .perfil-header {
+            margin-bottom: 32px;
+        }
+
+        .perfil-header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 4px;
+        }
+
+        .perfil-header p {
+            color: var(--color-text-light, #888);
+        }
+
+        .perfil-card {
+            background: white;
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 24px;
+        }
+
+        .perfil-card h2 {
+            font-size: 1.1rem;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #eee;
+            color: var(--color-primary, #768857);
+        }
+
+        .perfil-campo {
+            margin-bottom: 20px;
+        }
+
+        .perfil-campo label {
+            display: block;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+
+        .perfil-campo p {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #222;
+        }
+
+        .perfil-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 32px;
+        }
+
+        .btn-logout {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .btn-logout:hover {
+            opacity: 0.85;
+        }
+
+        .btn-voltar {
+            background: var(--color-primary, #768857);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            transition: opacity 0.2s;
+        }
+
+        .btn-voltar:hover {
+            opacity: 0.85;
+        }
+
+        .sem-endereco {
+            color: #aaa;
+            font-style: italic;
+        }
+
+        .endereco-item {
+            background: #f9f9f9;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+
+        .endereco-item p {
+            margin: 2px 0;
+            font-size: 0.95rem;
+        }
+
+        .loading-text {
+            color: #aaa;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="container navbar-content">
+            <a href="index.html" class="logo">
+                <img src="../images/LogoVerde.png" alt="VittaWear" class="logo-img">
+            </a>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+                <span class="hamburger"></span>
+            </button>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="produtos.html">Produtos</a></li>
+                <li><a href="sobre.html">Sobre</a></li>
+                <li><a href="contato.html">Contato</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <a href="carrinho.html" class="cart-btn" aria-label="Carrinho">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+                <a href="login.html" class="login-btn" id="loginBtn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <span class="login-text">Entrar</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Perfil -->
+    <main class="perfil-page">
+        <div class="perfil-container">
+
+            <div class="perfil-header">
+                <h1>Meu Perfil</h1>
+                <p>Suas informações na VittaWear</p>
+            </div>
+
+            <!-- Dados pessoais -->
+            <div class="perfil-card">
+                <h2>Dados Pessoais</h2>
+
+                <div class="perfil-campo">
+                    <label>Nome completo</label>
+                    <p id="perfilNome" class="loading-text">Carregando...</p>
+                </div>
+
+                <div class="perfil-campo">
+                    <label>E-mail</label>
+                    <p id="perfilEmail" class="loading-text">Carregando...</p>
+                </div>
+            </div>
+
+            <!-- Endereços -->
+            <div class="perfil-card">
+                <h2>Meus Endereços</h2>
+                <div id="perfilEnderecos" class="loading-text">Carregando...</div>
+            </div>
+
+            <!-- Ações -->
+            <div class="perfil-actions">
+                <a href="index.html" class="btn-voltar">Voltar para Home</a>
+                <button class="btn-logout" onclick="realizarLogout()">Sair da Conta</button>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="../js/utils.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/auth.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async function () {
+
+            // Se não estiver logado, manda pro login
+            exigirLogin();
+
+            // Carrega dados do usuário local
+            const usuario = obterUsuarioLogado();
+            if (usuario) {
+                document.getElementById('perfilNome').textContent = usuario.nome;
+                document.getElementById('perfilEmail').textContent = usuario.email;
+            }
+
+            // Busca endereços na API
+            const token = obterToken();
+            try {
+                const response = await fetch('http://127.0.0.1:5000/api/enderecos', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                const enderecos = await response.json();
+                const container = document.getElementById('perfilEnderecos');
+
+                if (enderecos.length === 0) {
+                    container.innerHTML = '<p class="sem-endereco">Nenhum endereço cadastrado.</p>';
+                } else {
+                    container.innerHTML = enderecos.map(e => `
+                        <div class="endereco-item">
+                            <p><strong>${e.rua}</strong></p>
+                            <p>${e.cidade} — CEP: ${e.cep}</p>
+                        </div>
+                    `).join('');
+                }
+            } catch (error) {
+                document.getElementById('perfilEnderecos').innerHTML = '<p class="sem-endereco">Não foi possível carregar os endereços.</p>';
+            }
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos - VittaWear</title>
+    <meta name="description"
+        content="Explore nossa coleção de scrubs e jalecos premium. Qualidade e elegância para profissionais da saúde.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/produtos.css">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="container navbar-content">
+            <a href="../index.html" class="logo">
+                <img src="../images/LogoVerde.png" alt="VittaWear" class="logo-img">
+            </a>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+                <span class="hamburger"></span>
+            </button>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="produtos.html" class="active">Produtos</a></li>
+                <li><a href="sobre.html">Sobre</a></li>
+                <li><a href="contato.html">Contato</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <a href="carrinho.html" class="cart-btn" aria-label="Carrinho">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+                <a href="login.html" class="login-btn" id="loginBtn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <span class="login-text">Entrar</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Navegação estrutural">
+                <a href="../index.html">Home</a>
+                <span>/</span>
+                <span>Produtos</span>
+            </nav>
+            <h1>Nossos Produtos</h1>
+            <p>Explore nossa coleção premium de scrubs e jalecos</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="products-page">
+        <div class="container">
+            <div class="products-layout">
+                <!-- Sidebar Filters -->
+                <aside class="products-sidebar">
+                    <div class="filter-section">
+                        <h3>Categorias</h3>
+                        <ul class="filter-list">
+                            <li>
+                                <label class="filter-checkbox">
+                                    <input type="checkbox" name="categoria" value="todos" checked>
+                                    <span class="checkmark"></span>
+                                    Todos
+                                </label>
+                            </li>
+                            <li>
+                                <label class="filter-checkbox">
+                                    <input type="checkbox" name="categoria" value="scrubs">
+                                    <span class="checkmark"></span>
+                                    Scrubs
+                                </label>
+                            </li>
+                            <li>
+                                <label class="filter-checkbox">
+                                    <input type="checkbox" name="categoria" value="jalecos">
+                                    <span class="checkmark"></span>
+                                    Jalecos
+                                </label>
+                            </li>
+                            <li>
+                                <label class="filter-checkbox">
+                                    <input type="checkbox" name="categoria" value="acessorios">
+                                    <span class="checkmark"></span>
+                                    Acessórios
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="filter-section">
+                        <h3>Faixa de Preço</h3>
+                        <ul class="filter-list">
+                            <li>
+                                <label class="filter-checkbox">
+                                    <input type="radio" name="preco" value="todos" checked>
+                                    <span class="checkmark"></span>
+                                    Todos os preços
+                                </label>
+                            </li>
+                            <li>
+                                <label class="filter-checkbox">
+                                    <input type="radio" name="preco" value="0-200">
+                                    <span class="checkmark"></span>
+                                    Até R$ 200
+                                </label>
+                            </li>
+                            <li>
+                                <label class="filter-checkbox">
+                                    <input type="radio" name="preco" value="200-350">
+                                    <span class="checkmark"></span>
+                                    R$ 200 - R$ 350
+                                </label>
+                            </li>
+                            <li>
+                                <label class="filter-checkbox">
+                                    <input type="radio" name="preco" value="350+">
+                                    <span class="checkmark"></span>
+                                    Acima de R$ 350
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="filter-section">
+                        <h3>Tamanho</h3>
+                        <div class="size-filters">
+                            <button class="size-btn" data-size="PP">PP</button>
+                            <button class="size-btn" data-size="P">P</button>
+                            <button class="size-btn" data-size="M">M</button>
+                            <button class="size-btn" data-size="G">G</button>
+                            <button class="size-btn" data-size="GG">GG</button>
+                            <button class="size-btn" data-size="XG">XG</button>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Products Content -->
+                <div class="products-content">
+                    <!-- Mobile Filter Toggle -->
+                    <button class="mobile-filter-btn" id="mobileFilterBtn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
+                        </svg>
+                        Filtros
+                    </button>
+
+                    <!-- Section 1: Produtos em Destaque (Fixos) -->
+                    <section class="products-section">
+                        <div class="section-heading">
+                            <h2>Produtos em Destaque</h2>
+                            <p>Nossas peças mais desejadas</p>
+                        </div>
+                        <div class="products-grid" id="produtosDestaque">
+                            <!-- Produtos fixos serão inseridos via JS -->
+                        </div>
+                    </section>
+
+                    <!-- Section 2: Produtos Dinâmicos (API) -->
+                    <section class="products-section">
+                        <div class="section-heading">
+                            <h2>Todos os Produtos</h2>
+                            <p>Explore nossa coleção completa</p>
+                        </div>
+
+                        <!-- Sort & View Controls -->
+                        <div class="products-controls">
+                            <span class="products-count" id="produtosCount">0 produtos</span>
+                            <div class="products-sort">
+                                <label for="sortSelect">Ordenar por:</label>
+                                <select id="sortSelect" class="form-select">
+                                    <option value="relevancia">Relevância</option>
+                                    <option value="menor-preco">Menor preço</option>
+                                    <option value="maior-preco">Maior preço</option>
+                                    <option value="nome">Nome A-Z</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="products-grid" id="produtosDinamicos">
+                            <!-- Loading -->
+                            <div class="loading-container" id="loadingProdutos">
+                                <div class="loading-spinner"></div>
+                            </div>
+                        </div>
+
+                        <!-- Empty State -->
+                        <div class="empty-state" id="emptyState" style="display: none;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8" />
+                                <path d="m21 21-4.3-4.3" />
+                            </svg>
+                            <h3>Nenhum produto encontrado</h3>
+                            <p>Tente ajustar os filtros ou busque por outro termo</p>
+                            <button class="btn btn-outline" onclick="limparFiltros()">Limpar filtros</button>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="../index.html" class="logo">
+                        <img src="../images/LogoVerde.png" alt="VittaWear" class="logo-img">
+                    </a>
+                    <p>Moda profissional premium para quem cuida da vida. Qualidade, conforto e estilo em cada peça.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Instagram">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Facebook">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="WhatsApp">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="produtos.html">Produtos</a></li>
+                        <li><a href="sobre.html">Sobre Nós</a></li>
+                        <li><a href="contato.html">Contato</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Categorias</h4>
+                    <ul>
+                        <li><a href="produtos.html?categoria=scrubs">Scrubs</a></li>
+                        <li><a href="produtos.html?categoria=jalecos">Jalecos</a></li>
+                        <li><a href="produtos.html?categoria=acessorios">Acessórios</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Conta</h4>
+                    <ul>
+                        <li><a href="login.html">Login</a></li>
+                        <li><a href="cadastro.html">Cadastro</a></li>
+                        <li><a href="carrinho.html">Carrinho</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 VittaWear. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Filter Sidebar Overlay -->
+    <div class="filter-overlay" id="filterOverlay"></div>
+
+    <!-- Scripts -->
+    <script src="../js/utils.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/produtos.js"></script>
+</body>
+
+</html>

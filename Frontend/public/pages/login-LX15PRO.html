@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - VittaWear</title>
+
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/auth.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="../index.html" class="logo">
+                    <img src="../images/LogoVerde.png" alt="VittaWear" class="logo-img">
+                </a>
+
+                <nav class="navbar" id="navbar">
+                    <div class="container navbar-content">
+                        <a href="../index.html" class="logo">
+                            <img src="../images/LogoVerde.png" alt=" VittaWear" class="logo-img">
+                        </a>
+
+                        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+                            <span class="hamburger"></span>
+                        </button>
+
+                        <ul class="nav-links" id="navLinks">
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="produtos.html">Produtos</a></li>
+                            <li><a href="sobre.html">Sobre</a></li>
+                            <li><a href="contato.html">Contato</a></li>
+                        </ul>
+
+                        <div class="nav-actions">
+                            <a href="login.html" class="login-btn active">
+                                <span class="login-text">Entrar</span>
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+                <div class="header-actions">
+                    <a href="login.html" class="btn-icon active">
+                        👤
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main -->
+    <main class="auth-page">
+        <div class="auth-container">
+
+            <!-- FORM -->
+            <div class="auth-card">
+                <div class="auth-header">
+                    <h1>Entrar</h1>
+                    <p>Acesse sua conta VittaWear</p>
+                </div>
+
+                <form class="auth-form" id="loginForm">
+
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+                        <span class="error-message" id="emailError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Senha</label>
+
+                        <div class="password-input">
+                            <input type="password" id="password" name="password" placeholder="Digite sua senha"
+                                required>
+
+                            <button type="button" class="toggle-password" id="togglePassword">
+                                👁
+                            </button>
+                        </div>
+
+                        <span class="error-message" id="passwordError"></span>
+                    </div>
+
+                    <div class="form-options">
+                        <a href="#" class="link">Esqueceu a senha?</a>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-full">
+                        Entrar
+                    </button>
+                </form>
+
+                <div class="auth-divider">
+                    <span>ou entre com</span>
+                </div>
+
+                <div class="social-login">
+                    <button type="button" class="btn-social btn-google">
+                        Google
+                    </button>
+                </div>
+
+                <p class="auth-footer">
+                    Não tem uma conta? <a href="cadastro.html">Criar conta</a>
+                </p>
+            </div>
+
+            <!-- LADO DIREITO -->
+            <div class="auth-image">
+                <div class="auth-image-content">
+                    <h2>Bem-vindo de volta</h2>
+                    <p>Entre para continuar sua experiência na VittaWear</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- auth.js deve vir antes deste script -->
+    <script src="../js/auth.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            // Se já estiver logado, manda pra home
+            redirecionarSeLogado();
+
+            // Mostrar/ocultar senha
+            const toggle = document.getElementById('togglePassword');
+            const input = document.getElementById('password');
+
+            toggle.addEventListener('click', function () {
+                const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+                input.setAttribute('type', type);
+            });
+
+            // Submit — chama a API real
+            const form = document.getElementById('loginForm');
+            const submitBtn = form.querySelector('button[type="submit"]');
+
+            form.addEventListener('submit', async function (e) {
+                e.preventDefault();
+
+                const email = document.getElementById('email').value.trim();
+                const senha = document.getElementById('password').value;
+
+                // Limpa erros anteriores
+                document.getElementById('emailError').textContent = '';
+                document.getElementById('passwordError').textContent = '';
+
+                // Validação básica no frontend
+                let valido = true;
+                if (!email) {
+                    document.getElementById('emailError').textContent = 'Informe o e-mail';
+                    valido = false;
+                }
+                if (!senha) {
+                    document.getElementById('passwordError').textContent = 'Informe a senha';
+                    valido = false;
+                }
+                if (!valido) return;
+
+                // Loading no botão
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Entrando...';
+
+                const resultado = await realizarLogin(email, senha);
+
+                if (resultado.sucesso) {
+                    // Redireciona para home após login
+                    window.location.href = 'index.html';
+                } else {
+                    // Mostra erro vindo da API
+                    document.getElementById('passwordError').textContent = resultado.mensagem;
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Entrar';
+                }
+            });
+
+        });
+    </script>
+
+</body>
+
+</html>

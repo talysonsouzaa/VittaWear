@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produto - VittaWear</title>
+    <meta name="description"
+        content="Detalhes do produto VittaWear. Scrubs e jalecos premium para profissionais da saúde.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/produto.css">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="container navbar-content">
+            <a href="index.html" class="logo">
+                <img src="../images/LogoVerde.png" alt="VittaWear" class="logo-img">
+            </a>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+                <span class="hamburger"></span>
+            </button>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="produtos.html">Produtos</a></li>
+                <li><a href="sobre.html">Sobre</a></li>
+                <li><a href="contato.html">Contato</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <a href="carrinho.html" class="cart-btn" aria-label="Carrinho">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+                <a href="login.html" class="login-btn" id="loginBtn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <span class="login-text">Entrar</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="product-page">
+        <div class="container">
+            <!-- Loading State -->
+            <div class="loading-container" id="loadingProduto">
+                <div class="loading-spinner"></div>
+            </div>
+
+            <!-- Product Content (will be populated by JS) -->
+            <div class="product-detail" id="productDetail" style="display: none;">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Navegação estrutural">
+                    <a href="../index.html">Home</a>
+                    <span>/</span>
+                    <a href="produtos.html">Produtos</a>
+                    <span>/</span>
+                    <span id="breadcrumbProduto">Produto</span>
+                </nav>
+
+                <div class="product-grid">
+                    <!-- Product Image -->
+                    <div class="product-gallery">
+                        <div class="product-main-image" id="productMainImage">
+                            <div class="product-placeholder">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path
+                                        d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <span class="product-badge-large" id="productBadge" style="display: none;">Destaque</span>
+                    </div>
+
+                    <!-- Product Info -->
+                    <div class="product-info">
+                        <span class="product-category-label" id="productCategory">Categoria</span>
+                        <h1 class="product-title" id="productTitle">Nome do Produto</h1>
+
+                        <div class="product-price-container">
+                            <span class="product-price-current" id="productPrice">R$ 0,00</span>
+                            <span class="product-price-original" id="productPriceOriginal"></span>
+                            <span class="product-discount" id="productDiscount"></span>
+                        </div>
+
+                        <p class="product-description" id="productDescription">
+                            Descrição do produto...
+                        </p>
+
+                        <!-- Size Selection -->
+                        <div class="product-option">
+                            <label>Tamanho:</label>
+                            <div class="size-options" id="sizeOptions">
+                                <!-- Size buttons will be added by JS -->
+                            </div>
+                        </div>
+
+                        <!-- Color Selection -->
+                        <div class="product-option" id="colorOptionContainer">
+                            <label>Cor:</label>
+                            <div class="color-options" id="colorOptions">
+                                <!-- Color options will be added by JS -->
+                            </div>
+                        </div>
+
+                        <!-- Quantity -->
+                        <div class="product-option">
+                            <label>Quantidade:</label>
+                            <div class="quantity-selector">
+                                <button type="button" class="qty-btn" id="qtyMinus">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    </svg>
+                                </button>
+                                <input type="number" id="quantity" value="1" min="1" max="10" readonly>
+                                <button type="button" class="qty-btn" id="qtyPlus">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Add to Cart Button -->
+                        <div class="product-actions-container">
+                            <button class="btn btn-primary btn-lg btn-block" id="addToCartBtn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <circle cx="9" cy="21" r="1"></circle>
+                                    <circle cx="20" cy="21" r="1"></circle>
+                                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                                </svg>
+                                Adicionar ao Carrinho
+                            </button>
+                            <button class="btn btn-secondary btn-lg btn-block" id="buyNowBtn">
+                                Comprar Agora
+                            </button>
+                        </div>
+
+                        <!-- Product Features -->
+                        <div class="product-features">
+                            <div class="feature-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="m7.5 4.27 9 5.15" />
+                                    <path
+                                        d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
+                                    <path d="m3.3 7 8.7 5 8.7-5" />
+                                    <path d="M12 22V12" />
+                                </svg>
+                                <span>Frete grátis acima de R$ 299</span>
+                            </div>
+                            <div class="feature-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4" />
+                                    <path d="M3 5v14a2 2 0 0 0 2 2h16v-5" />
+                                    <path d="M18 12a2 2 0 0 0 0 4h4v-4Z" />
+                                </svg>
+                                <span>Troca em até 30 dias</span>
+                            </div>
+                            <div class="feature-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
+                                    <path d="m9 12 2 2 4-4" />
+                                </svg>
+                                <span>Compra 100% segura</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Not Found -->
+            <div class="empty-state" id="productNotFound" style="display: none;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="m15 9-6 6" />
+                    <path d="m9 9 6 6" />
+                </svg>
+                <h3>Produto não encontrado</h3>
+                <p>O produto que você está procurando não existe ou foi removido.</p>
+                <a href="produtos.html" class="btn btn-primary">Ver Todos os Produtos</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="../index.html" class="logo">
+                        <img src="../images/LogoVerde.png" alt="VittaWear" class="logo-img">
+                    </a>
+                    <p>Moda profissional premium para quem cuida da vida. Qualidade, conforto e estilo em cada peça.</p>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="produtos.html">Produtos</a></li>
+                        <li><a href="sobre.html">Sobre Nós</a></li>
+                        <li><a href="contato.html">Contato</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Categorias</h4>
+                    <ul>
+                        <li><a href="produtos.html?categoria=scrubs">Scrubs</a></li>
+                        <li><a href="produtos.html?categoria=jalecos">Jalecos</a></li>
+                        <li><a href="produtos.html?categoria=acessorios">Acessórios</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Conta</h4>
+                    <ul>
+                        <li><a href="login.html">Login</a></li>
+                        <li><a href="cadastro.html">Cadastro</a></li>
+                        <li><a href="carrinho.html">Carrinho</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 VittaWear. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/utils.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/produto.js"></script>
+</body>
+
+</html>
