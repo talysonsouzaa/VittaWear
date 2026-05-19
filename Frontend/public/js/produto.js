@@ -57,8 +57,8 @@ async function carregarProduto() {
  */
 async function buscarProdutoSimulado(id) {
     const produtosApi = [
-        {
-            id: 'api-1',
+        {  /*Não Adcionar no Banco de Dados, Para não ficar duplicado*/
+            id: '',
             nome: 'Scrub Standard Masculino',
             categoria: 'scrubs',
             preco: 124.90,
@@ -75,7 +75,7 @@ async function buscarProdutoSimulado(id) {
             destaque: false
         },
         {
-            id: 'api-2',
+            id: 1,
             nome: 'Scrub Action Masculino',
             categoria: 'scrubs',
             preco: 154.90,
@@ -84,15 +84,15 @@ async function buscarProdutoSimulado(id) {
             tamanhos: ['P', 'M', 'G', 'GG', 'XG'],
             cores: ['Preto'],
             imagens: [
-                "../images/Jalecos/JalecoMasc.jpg",
-                "../images/Jalecos/JalecoMasc1.jpg",
-                "../images/Jalecos/JalecoMasc2.jpg",
-                "../images/Jalecos/JalecoMasc3.jpg",
+                "../images/Scrubs/ScrubActionMasc/ScrubAcMasc.jpg",
+                "../images/Scrubs/ScrubActionMasc/ScrubAcMasc1.jpg",
+                "../images/Scrubs/ScrubActionMasc/ScrubAcMasc2.jpg",
+                "../images/Scrubs/ScrubActionMasc/ScrubAcMasc3.jpg"
             ],
             destaque: false
         },
         {
-            id: 'api-3',
+            id: 2,
             nome: 'Conjunto Scrub Essential',
             categoria: 'scrubs',
             preco: 149.90,
@@ -108,8 +108,8 @@ async function buscarProdutoSimulado(id) {
             ],
             destaque: false
         },
-        {
-            id: 'api-4',
+        {   /*Não Adcionar no Banco de Dados, Para não ficar duplicado*/
+            id: '',
             nome: 'Conjunto Scrub Basic Feminino',
             categoria: 'scrubs',
             preco: 99.90,
@@ -125,8 +125,8 @@ async function buscarProdutoSimulado(id) {
             ],
             destaque: false
         },
-        {
-            id: 'api-5',
+        {   /*Não Adcionar no Banco de Dados, Para não ficar duplicado*/
+            id: '',
             nome: 'Scrub Moove Feminino',
             categoria: 'scrubs',
             preco: 239.90,
@@ -143,7 +143,7 @@ async function buscarProdutoSimulado(id) {
             destaque: false
         },
         {
-            id: 'api-6',
+            id: 3,
             nome: 'Scrub Classic Feminino',
             categoria: 'scrubs',
             preco: 119.90,
@@ -160,7 +160,7 @@ async function buscarProdutoSimulado(id) {
             destaque: false
         },
         {
-            id: 'api-7',
+            id: 4,
             nome: 'Scrub Deluxe Feminino',
             categoria: 'scrubs',
             preco: 189.90,
@@ -177,20 +177,25 @@ async function buscarProdutoSimulado(id) {
             destaque: false
         },
         {
-            id: 'api-8',
-            nome: 'Kit Máscaras N95',
-            categoria: 'acessorios',
-            preco: 89.90,
+            id: '',
+            nome: 'Jaleco Basic Oxford',
+            categoria: 'Jalecos',
+            preco: 124.90,
             precoOriginal: null,
-            descricao: 'Kit com 10 máscaras N95 de alta proteção. Ajuste perfeito ao rosto. Certificação de qualidade.',
-            tamanhos: ['Único'],
+            descricao: 'Modelo masculino com visual alinhado e maior resistência, indicado para uso profissional contínuo',
+            tamanhos: ['PP', 'P', 'M', 'G', 'GG'],
             cores: ['Branco'],
-            imagens: [],
+            imagens: [
+                "../images/Jalecos/JalecoOxGeral/JalecoOxf.png",
+                "../images/Jalecos/JalecoOxGeral/JalecoOxf1.png",
+                "../images/Jalecos/JalecoOxGeral/JalecoOxf2.png",
+                "../images/Jalecos/JalecoOxGeral/JalecoOxf3.png"
+            ],
             destaque: false
         }
     ];
 
-    return produtosApi.find(p => p.id === id) || null;
+    return produtosApi.find(p => String(p.id) === String(id)) || null;
 }
 
 /**

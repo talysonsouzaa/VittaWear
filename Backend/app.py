@@ -18,7 +18,7 @@ def create_app():
     app.config["JWT_ACCESS_TOKEN_EXPIRES"] = False  # Token não expira (ajuste se quiser, ex: timedelta(days=7))
 
     # ── Extensões ──────────────────────────────────
-    CORS(app, resources={r"/api/*": {"origins": "*"}})  # Em produção, substitua "*" pelo domínio do site
+    CORS(app, origins="*", supports_credentials=True)  # Em produção, substitua "*" pelo domínio do site
     JWTManager(app)
 
     # ── Registra Blueprints (rotas) ─────────────────

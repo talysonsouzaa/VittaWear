@@ -135,6 +135,7 @@ def detalhe_produto(produto_id):
     produto["tamanhos"] = _tamanhos_do_produto(produto_id)
     produto["cores"]    = _cores_do_produto(produto_id)
     produto["variantes"] = _variantes_do_produto(produto_id)
+    produto["imagens"]   = _imagens_do_produto(produto_id)
 
     return jsonify(produto), 200
 
@@ -179,7 +180,7 @@ def listar_categorias():
 # --------------------------------------------------
 def _tamanhos_do_produto(produto_id: int):
     sql = """
-        SELECT DISTINCT t.nome
+        SELECT DISTINCT t.id, t.nome
         FROM produto_variantes pv
         JOIN tamanhos t ON pv.tamanho_id = t.id
         WHERE pv.produto_id = %s AND pv.estoque > 0
@@ -191,7 +192,7 @@ def _tamanhos_do_produto(produto_id: int):
 
 def _cores_do_produto(produto_id: int):
     sql = """
-        SELECT DISTINCT c.nome
+        SELECT DISTINCT c.id, c.nome
         FROM produto_variantes pv
         JOIN cores c ON pv.cor_id = c.id
         WHERE pv.produto_id = %s AND pv.estoque > 0
@@ -199,6 +200,7 @@ def _cores_do_produto(produto_id: int):
     """
     rows = query(sql, (produto_id,))
     return [r["nome"] for r in rows]
+   
 
 
 def _variantes_do_produto(produto_id: int):
@@ -215,3 +217,13 @@ def _variantes_do_produto(produto_id: int):
         ORDER BY t.id, c.id
     """
     return query(sql, (produto_id,))
+
+def _imagens_do_produto(produto_id: int):
+    sql = """
+        SELECT caminho
+        FROM produto_imagens
+        WHERE produto_id = %s
+        ORDER BY ordem ASC
+    """
+    rows = query(sql, (produto_id,))
+    return [r["caminho"] for r in rows]

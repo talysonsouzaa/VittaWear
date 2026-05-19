@@ -75,8 +75,8 @@ async function simularApiProdutos() {
     await new Promise(resolve => setTimeout(resolve, 500));
 
     return [
-        {
-            id: 'api-1',
+        {  /*Não Adcionar no Banco de Dados, Para não ficar duplicado*/
+            id: '',
             nome: 'Scrub Standard Masculino',
             categoria: 'scrubs',
             preco: 124.90,
@@ -93,7 +93,7 @@ async function simularApiProdutos() {
             destaque: false
         },
         {
-            id: 'api-2',
+            id: 1,
             nome: 'Scrub Action Masculino',
             categoria: 'scrubs',
             preco: 154.90,
@@ -110,23 +110,24 @@ async function simularApiProdutos() {
             destaque: false
         },
         {
-            id: 'api-3',
+            id: 2,
             nome: 'Conjunto Scrub Essential',
             categoria: 'scrubs',
             preco: 149.90,
             precoOriginal: 239.90,
-            descricao: ' Scrub premium feminino que une conforto térmico e flexibilidade, ideal para longos turnos.',
+            descricao: 'Scrub premium feminino que une conforto térmico e flexibilidade, ideal para longos turnos.',
             tamanhos: ['PP', 'P', 'M', 'G', 'GG'],
             cores: ['Azul Turquesa'],
             imagens: [
                 "../images/Scrubs/ScrubEssenctialFem/ScrubFem.jpg",
-                "../images/Scrubs/ScrubEssenctialFem/ScrubFem1jpg",
-                "../images/Scrubs/ScrubEssenctialFem/ScrubFem2.jpg",
-                "../images/Scrubs/ScrubEssenctialFem/ScrubFem3.jpg"
+                "../images/Scrubs/ScrubEssenctialFem/ScrubFem.jpg",
+                "../images/Scrubs/ScrubEssenctialFem/ScrubFem.jpg",
+                "../images/Scrubs/ScrubEssenctialFem/ScrubFem.jpg"
             ],
+            destaque: false
         },
-        {
-            id: 'api-4',
+        {   /*Não Adcionar no Banco de Dados, Para não ficar duplicado*/
+            id: '',
             nome: 'Conjunto Scrub Basic Feminino',
             categoria: 'scrubs',
             preco: 99.90,
@@ -136,14 +137,14 @@ async function simularApiProdutos() {
             cores: ['Rosa Coral'],
             imagens: [
                 "../images/Scrubs/ScrubBasicFem/ScrubBaFem.jpg",
-                "../images/Scrubs/ScrubBasicFem/ScrubBaFem1.jpg",
-                "../images/Scrubs/ScrubBasicFem/ScrubBaFem2.jpg",
-                "../images/Scrubs/ScrubBasicFem/ScrubBaFem3.jpg"
+                "../images/Scrubs/ScrubBasicFem/ScrubBaFem.jpg",
+                "../images/Scrubs/ScrubBasicFem/ScrubBaFem.jpg",
+                "../images/Scrubs/ScrubBasicFem/ScrubBaFem.jpg"
             ],
             destaque: false
         },
-        {
-            id: 'api-5',
+        {   /*Não Adcionar no Banco de Dados, Para não ficar duplicado*/
+            id: '',
             nome: 'Scrub Moove Feminino',
             categoria: 'scrubs',
             preco: 239.90,
@@ -153,14 +154,14 @@ async function simularApiProdutos() {
             cores: ['Verde Oliva', 'Azul Royal'],
             imagens: [
                 "../images/Scrubs/ScrubMooveFem/ScrubMoFem.jpg",
-                "../images/Scrubs/ScrubMooveFem/ScrubMoFem1.jpg",
-                "../images/Scrubs/ScrubMooveFem/ScrubMoFem2.jpg",
-                "../images/Scrubs/ScrubMooveFem/ScrubMoFem3.jpg"
+                "../images/Scrubs/ScrubMooveFem/ScrubMoFem.jpg",
+                "../images/Scrubs/ScrubMooveFem/ScrubMoFem.jpg",
+                "../images/Scrubs/ScrubMooveFem/ScrubMoFem.jpg"
             ],
             destaque: false
         },
         {
-            id: 'api-6',
+            id: 3,
             nome: 'Scrub Classic Feminino',
             categoria: 'scrubs',
             preco: 119.90,
@@ -170,19 +171,19 @@ async function simularApiProdutos() {
             cores: ['Vinho'],
             imagens: [
                 "../images/Scrubs/ScrubClasscFem/ScrubCLFem.jpg",
-                "../images/Scrubs/ScrubClasscFem/ScrubCLFem1.jpg",
-                "../images/Scrubs/ScrubClasscFem/ScrubCLFem2.jpg",
-                "../images/Scrubs/ScrubClasscFem/ScrubCLFem3.jpg"
+                "../images/Scrubs/ScrubClasscFem/ScrubCLFem.jpg",
+                "../images/Scrubs/ScrubClasscFem/ScrubCLFem.jpg",
+                "../images/Scrubs/ScrubClasscFem/ScrubCLFem.jpg"
             ],
             destaque: false
         },
         {
-            id: 'api-7',
+            id: 4,
             nome: 'Scrub Deluxe Feminino',
             categoria: 'scrubs',
             preco: 189.90,
             precoOriginal: 229.90,
-            descricao: 'Modelo sofisticado, com toque leve e caimento elegante, indicado para quem busca diferenciação estética',
+            descricao: 'Modelo sofisticado, com toque leve e caimento elegante, indicado para quem busca diferenciação estética.',
             tamanhos: ['PP', 'P', 'M', 'G', 'GG'],
             cores: ['Vermelho'],
             imagens: [
@@ -193,16 +194,21 @@ async function simularApiProdutos() {
             ],
             destaque: false
         },
-        {
-            id: 'api-8',
-            nome: 'Kit Máscaras N95',
-            categoria: 'acessorios',
-            preco: 89.90,
+        {   /*Não Adcionar no Banco de Dados, Para não ficar duplicado*/
+            id: '',
+            nome: 'Jaleco Classic Gabardine',
+            categoria: 'Jalecos',
+            preco: 124.90,
             precoOriginal: null,
-            descricao: 'Kit com 10 máscaras N95 de alta proteção. Ajuste perfeito ao rosto. Certificação de qualidade.',
-            tamanhos: ['Único'],
+            descricao: 'Modelo masculino com visual alinhado e maior resistência, indicado para uso profissional contínuo',
+            tamanhos: ['PP', 'P', 'M', 'G', 'GG'],
             cores: ['Branco'],
-            imagem: null,
+            imagens: [
+                "../images/Jalecos/JalecoOxGeral/JalecoOxf.png",
+                "../images/Jalecos/JalecoOxGeral/JalecoOxf1.png",
+                "../images/Jalecos/JalecoOxGeral/JalecoOxf2.png",
+                "../images/Jalecos/JalecoOxGeral/JalecoOxf3.png"
+            ],
             destaque: false
         }
     ];

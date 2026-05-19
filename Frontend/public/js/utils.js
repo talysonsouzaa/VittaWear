@@ -34,10 +34,10 @@ const PRODUTOS_FIXOS = [
         tamanhos: ['P', 'M', 'G', 'GG'],
         cores: ['Branco', 'Off-White'],
         imagens: [
-            "../images/Jalecos/JalecoMasc.jpg",
-            "../images/Jalecos/JalecoMasc1.jpg",
-            "../images/Jalecos/JalecoMasc2.jpg",
-            "../images/Jalecos/JalecoMasc3.jpg",
+            "../images/Jalecos/JalecoGarGeral/JalecoGab.jpg",
+            "../images/Jalecos/JalecoGarGeral/JalecoGab1.jpg",
+            "../images/Jalecos/JalecoGarGeral/JalecoGab2.jpg",
+            "../images/Jalecos/JalecoGarGeral/JalecoGab3.jpg",
         ],
         destaque: false
     },
@@ -114,15 +114,13 @@ function obterParametroUrl(nome) {
  * @returns {Promise<object|null>}
  */
 async function buscarProdutoPorId(id) {
-    // Primeiro verifica nos produtos fixos
-    const produtoFixo = PRODUTOS_FIXOS.find(p => p.id === id);
-    if (produtoFixo) {
-        return produtoFixo;
-    }
+    // Verifica nos produtos fixos (compara como string)
+    const produtoFixo = PRODUTOS_FIXOS.find(p => String(p.id) === String(id));
+    if (produtoFixo) return produtoFixo;
 
-    // Se não encontrou, busca na API
+    // Busca na API com URL completa
     try {
-        const response = await fetch(`/api/produtos/${id}`);
+        const response = await fetch(`http://127.0.0.1:5000/api/produtos/${id}`);
         if (response.ok) {
             return await response.json();
         }
