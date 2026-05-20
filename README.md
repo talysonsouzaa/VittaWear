@@ -42,6 +42,10 @@ Objetivo
 
 Desenvolver uma aplicação funcional voltada para uso real, atendendo às necessidades de um cliente e consolidando práticas de desenvolvimento web.
 
+link de visualização do frontend: https://talysonsouzaa.github.io/VittaWear/
+lembrando como o backend não foi hospedado, Os produtos não serao encontrados a não ser os destaques, e a parte de cadastro e login não funcionara.
+
+
 Autor
 
 Talyson Souza**
